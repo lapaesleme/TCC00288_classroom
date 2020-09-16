@@ -102,3 +102,4 @@ SELECT distinct f from FP as a1 where not exists((select p from PLondres) EXCEPT
 
 SELECT * from FP;
 select f,count(p), AVG(qtd) from FP GROUP BY f;
+SELECT * from FP;
