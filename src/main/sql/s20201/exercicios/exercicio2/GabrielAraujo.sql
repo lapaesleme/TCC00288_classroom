@@ -30,8 +30,7 @@ cidade varchar
 );
 
 insert into Fornecedor1 values ('S1','Smith','20','Londres');
-insert into Fornecedor1 values ('S2','Jones','10','Paris');
-insert into Fornecedor1 values ('S1','Blake','30','Paris');
+insert into Fornecedor1 values ('S4','Jones','10','Paris');
 
 drop table if exists Pecas cascade;
 create table Pecas(
@@ -73,8 +72,8 @@ insert into PLondres values ('P2');
 /* Projeção
 select distinct p from Fp;  */
 
-/* Intersecção
-select * from fornecedor,fornecedor1 where fornecedor.* = fornecedor1.*; */
+Intersecção
+select fornecedor.f from fornecedor,fornecedor1 where fornecedor.f = fornecedor1.f;
 
 /* produto cartesiano
 select * from fornecedor,pecas; */
@@ -98,8 +97,11 @@ select f from fornecedor where f='S1'; */
 /* select * from fornecedor EXCEPT select * from fornecedor1; */
 
 
-SELECT distinct f from FP as a1 where not exists((select p from PLondres) EXCEPT (select a2.p from FP as a2 where a2.f = a1.f));
+/* SELECT distinct f from FP as a1 where not exists((select p from PLondres) EXCEPT (select a2.p from FP as a2 where a2.f = a1.f));
 
 SELECT * from FP;
 select f,count(p), AVG(qtd) from FP GROUP BY f;
 SELECT * from FP;
+
+Select f,p,qtd + 10
+from FP; */
