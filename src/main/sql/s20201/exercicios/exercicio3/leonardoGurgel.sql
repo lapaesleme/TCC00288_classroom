@@ -28,4 +28,8 @@ begin
 end;
 $$ language plpgsql;
 
-select multiplica_matrizes('{{1,2,3},{1,2,3}}'::float[][], '{{1,2},{3,4},{5,6}}'::float[][]);
+-- esperado: {{22, 28}, {22, 28}}
+select multiplica_matrizes('{{1,2,3},{1,2,3}}'::float[][], '{{1,2},{3,4},{5,6}}'::float[][]); 
+
+-- esperado: {{8, 8}, {8, 8}}
+select multiplica_matrizes('{{2,2},{2,2}}'::float[][], '{{2,2},{2,2}}'::float[][]);
