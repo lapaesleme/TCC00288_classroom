@@ -73,3 +73,9 @@ EXCEPT
 -- x1	y4
 -- x4	y2
 -- x4	y4
+
+
+
+SELECT ID_Funcionario
+FROM Escala
+WHERE ID_Funcionario IN (SELECT * FROM Escala GROUP BY ID_Funcionario HAVING COUNT(DISTINCT Data) = SELECT COUNT(DISTINCT Data) FROM Agenda);
