@@ -1,6 +1,6 @@
 DROP TABLE IF EXISTS Mat1 CASCADE;
 DROP TABLE IF EXISTS Mat2 CASCADE;
-DROP TABLE IF EXISTS Matres CASCADE;
+DROP TABLE IF EXISTS MatError CASCADE;
 
 CREATE TABLE Mat1
 (
@@ -54,8 +54,9 @@ END;
 $$ 
 LANGUAGE PLPGSQL;
 
-/*SELECT MultiplicaMat(Mat1.elem, Mat2.elem) 
-FROM Mat1, Mat2;*/
+
+SELECT MultiplicaMat(Mat1.elem, Mat2.elem) 
+FROM Mat1, Mat2;
 
 SELECT MultiplicaMat(Mat1.elem, MatError.elem)
 FROM Mat1, MatError;
