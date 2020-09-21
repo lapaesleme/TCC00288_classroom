@@ -1,4 +1,4 @@
--- comentário
+---- comentário
 drop table if exists r1  cascade;
 drop table if exists r2  cascade;
 
