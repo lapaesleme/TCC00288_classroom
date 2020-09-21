@@ -5,7 +5,7 @@ CREATE TABLE Mat
 elem integer[][]
 );
 
-INSERT INTO mat(elem) VALUES (ARRAY[[1,2,3],[4,5,6],[7,8,9]]);
+INSERT INTO Mat(elem) VALUES (ARRAY[[1,2,3],[4,5,6],[7,8,9]]);
 
 DROP FUNCTION IF EXISTS RemoveLC(mat integer[][], i integer, j integer) CASCADE;
 
