@@ -44,7 +44,7 @@ BEGIN
     END IF;
 
     IF (m_i = 1 OR m_j = 1) THEN
-        updatedMatrix := '{}';
+        updatedMatrix := '{}'; /*caso a matriz tenha apenas 1 linha ou coluna, fatalmente a mesma será deletada, acarretando no retorno de uma matriz vazia*/
         RETURN updatedMatrix;
     END IF;
 
@@ -67,8 +67,7 @@ BEGIN
     LOOP
         FOR j IN selected_col..m_j LOOP
            IF j <> m_j THEN
-                matrix[i][j] := matrix[i][j + 1];
-                /*substituir a coluna atual pela próxima*/
+                matrix[i][j] := matrix[i][j + 1]; /*substituir a coluna atual pela próxima*/
             END IF;
         END LOOP;
     END LOOP;
@@ -77,7 +76,7 @@ BEGIN
     LOOP
         FOR j in 1..m_j-1
         LOOP
-            updatedMatrix[i][j]:= matrix[i][j];
+            updatedMatrix[i][j]:= matrix[i][j]; /*Passando elementos da matriz original para uma atualizada, mas sem copiar a coluna que 'sobra'. Este artifício foi necessário pois a funcao array_remove só aceita arrays unidimensionais.*/
         END LOOP;
     END LOOP;   
     RETURN updatedMatrix;
