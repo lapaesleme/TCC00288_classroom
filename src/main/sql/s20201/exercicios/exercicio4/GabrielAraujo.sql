@@ -1,4 +1,4 @@
-CREATE OR REPLACE FUNCTION multMatriz (m float[][], i integer, j integer) RETURNS FLOAt[][] as $$
+CREATE OR REPLACE FUNCTION removeLeC (m float[][], i integer, j integer) RETURNS FLOAt[][] as $$
 DECLARE
 	r FLOAT[][];
 	linhas integer;
@@ -23,5 +23,5 @@ BEGIN
 END;
 $$ LANGUAGE plpgsql;
 
-select multMatriz('{{1,2,3},{1,2,3},{1,2,3}}'::float[][], 2,2);
+select removeLeC('{{1,2,3},{1,2,3},{1,2,3}}'::float[][], 2,2);
 --{{1,3},{1,3}}
