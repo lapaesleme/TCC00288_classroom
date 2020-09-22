@@ -23,8 +23,7 @@ BEGIN
 	c:= ARRAY_LENGTH(m2,2);
 
 	if r<>l1 THEN
-		RAISE NOTICE 'Tipos incompativeis';
-		RETURN x;
+		RAISE EXCEPTION 'Tamanhos incompativeis';
 	end if;
 
 	resp := array_fill(0, array[l,c]);
