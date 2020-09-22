@@ -17,7 +17,7 @@ INSERT INTO Table1 VALUES (ARRAY[[1, 2, 1],[1, 1, 1],[1, 1, 1]]);
 
 INSERT INTO Table2 VALUES (ARRAY[[1,2,3]]);
 
---INSERT INTO Table2 VALUES (ARRAY[[1,2]]);
+INSERT INTO Table2 VALUES (ARRAY[[1,2]]);
 --comentar para retirar caso de falha
 
 create or replace function M1xM2(M1 float[][], M2 float[][])
