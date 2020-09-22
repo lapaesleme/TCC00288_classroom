@@ -26,7 +26,7 @@ INSERT INTO matrix3 (content)
     VALUES (ARRAY[[2, 5],[4, 3]]);
 
 DROP FUNCTION deletefrommatrix (selected_row integer, selected_col integer, matrix float[][]);
-/*A função não retornará nenhum valor, apenas modificará a matriz original*/
+
 CREATE OR REPLACE FUNCTION deletefrommatrix (selected_row integer, selected_col integer, matrix float[][])
     RETURNS float[][]
     AS $$
@@ -61,7 +61,7 @@ BEGIN
     END IF;
     
    
-    matrix:=matrix[1:m_i-1];
+    matrix:=matrix[1:m_i-1]; /*Removendo da matriz original a linha que 'sobra'*/
     
     IF selected_col<>m_j THEN
         FOR i IN 1..m_i-1
