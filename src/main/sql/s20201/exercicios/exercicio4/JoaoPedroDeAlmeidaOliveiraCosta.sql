@@ -58,4 +58,4 @@ $$ LANGUAGE plpgsql;
 
 select DeleteLC(1 , 1 , table1.colunaM1) from table1;
 
-elect DeleteLC(1 , 2 , table1.colunaM1) from table1;
+select DeleteLC(1 , 2 , table1.colunaM1) from table1;
