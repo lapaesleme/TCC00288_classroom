@@ -23,7 +23,7 @@ INSERT INTO matrix2 (content)
     VALUES (ARRAY[[2],[- 3],[1]]);
 
 INSERT INTO matrix3 (content)
-    VALUES (ARRAY[[2, 2],[3, 3]]);
+    VALUES (ARRAY[[2, 5],[4, 3]]);
 
 DROP FUNCTION deletefrommatrix (selected_row integer, selected_col integer, matrix float[][]);
 /*A função não retornará nenhum valor, apenas modificará a matriz original*/
@@ -63,14 +63,16 @@ BEGIN
    
     matrix:=matrix[1:m_i-1];
     
-    FOR i IN 1..m_i-1
-    LOOP
-        FOR j IN selected_col..m_j LOOP
-           IF j <> m_j THEN
-                matrix[i][j] := matrix[i][j + 1]; /*substituir a coluna atual pela próxima*/
-            END IF;
+    IF selected_col<>m_j THEN
+        FOR i IN 1..m_i-1
+        LOOP
+            FOR j IN selected_col..m_j LOOP
+            IF j <> m_j THEN
+                    matrix[i][j] := matrix[i][j + 1]; /*substituir a coluna atual pela próxima*/
+                END IF;
+            END LOOP;
         END LOOP;
-    END LOOP;
+    END IF;
 
     FOR i IN 1..m_i-1
     LOOP
@@ -91,5 +93,5 @@ SELECT deletefrommatrix(1,3,matrix1.content) FROM matrix1;
 SELECT
     deletefrommatrix(2, 1, matrix2.content) FROM matrix2;
 
-SELECT deletefrommatrix(1,1, matrix3.content) FROM matrix3;
+SELECT deletefrommatrix(1,2, matrix3.content) FROM matrix3;
 
