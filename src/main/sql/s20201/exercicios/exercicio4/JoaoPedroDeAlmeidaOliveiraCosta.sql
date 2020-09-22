@@ -11,8 +11,9 @@ INSERT INTO Table1 VALUES (ARRAY[[1,2,3],[4,5,6],[7,8,9]]);
 INSERT INTO Table1 VALUES (ARRAY[[1,2],[4,5],[7,8]]);
 INSERT INTO Table1 VALUES (ARRAY[[1],[4],[7]]);
 INSERT INTO Table1 VALUES (ARRAY[[1,2,3],[4,5,6]]);
-INSERT INTO Table1 VALUES (ARRAY[[1,2,3]]);
 
+INSERT INTO Table1 VALUES (ARRAY[[1,2,3]]);
+--comentar para retirar caso de erro
 
 create or replace function DeleteLC(i int, j int, M float[][])
 returns float[][] as $$
@@ -32,14 +33,14 @@ begin
     end if;
     
     for coluna in 1..MC loop
-    raise notice '% - %', coluna, j;
+    --raise notice '% - %', coluna, j;
         if coluna <> j then
             Aux := '{}';
-            raise notice '%', Aux;
+            --raise notice '%', Aux;
             for linha in 1..ML loop
                 if linha <> i then
                     Aux := array_append(Aux, M[coluna][linha]);
-                    raise notice '%', Aux;
+                    --raise notice '%', Aux;
                 end if;
             end loop;
             if array_length(Aux,1)>0 then
@@ -48,10 +49,13 @@ begin
         end if;
     end loop;
     
+    raise notice 'saida: %', M3;
     return M3;
 END
 $$ LANGUAGE plpgsql;
 
 
 
-select DeleteLC(1 , 2 , table1.colunaM1) from table1;
+select DeleteLC(1 , 1 , table1.colunaM1) from table1;
+
+elect DeleteLC(1 , 2 , table1.colunaM1) from table1;
