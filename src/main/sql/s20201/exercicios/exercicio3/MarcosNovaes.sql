@@ -1,8 +1,8 @@
-DROP TABLE IF EXISTS matriz1;
+DROP TABLE IF EXISTS matriz1 CASCADE;
 
-DROP TABLE IF EXISTS matriz2;
+DROP TABLE IF EXISTS matriz2 CASCADE;
 
-DROP TABLE IF EXISTS matriz3;
+DROP TABLE IF EXISTS matriz3 CASCADE;
 
 CREATE TABLE matriz1
 (
@@ -20,6 +20,9 @@ CREATE TABLE matriz3
 INSERT INTO matriz1 (content) VALUES (ARRAY[[1, 2, 3],[4, 5, 6],[7, 8, 9]]); 
 INSERT INTO matriz2 (content) VALUES (ARRAY[[1],[2], [3]]);
 INSERT INTO matriz3(content) VALUES (ARRAY[[-100, -100], [100,100]]);
+
+
+DROP FUNCTION IF EXISTS multiplicaMatrizes () CASCADE;
 
 CREATE OR REPLACE FUNCTION multiplicaMatrizes (matriz1 float[][], matriz2 float[][])
     RETURNS float[][]
