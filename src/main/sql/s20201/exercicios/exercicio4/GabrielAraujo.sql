@@ -4,7 +4,6 @@ DECLARE
 	linhas integer;
 	colunas integer;
 	aux float[];
-	k integer;
 	
 BEGIN
 
