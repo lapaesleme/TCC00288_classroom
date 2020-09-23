@@ -22,7 +22,7 @@ CREATE OR REPLACE FUNCTION fib (n int) RETURNS integer AS $$
     END;
 $$ LANGUAGE plpgsql;
 
-CREATE FUNCTION fib_rel (n integer) RETURNS table(pos integer, valor integer) AS $$
+CREATE FUNCTION fib_rel (n integer) RETURNS TABLE(pos integer, valor integer) AS $$
     DECLARE
         result integer[][];
         aux integer[];
@@ -36,7 +36,7 @@ CREATE FUNCTION fib_rel (n integer) RETURNS table(pos integer, valor integer) AS
 $$ LANGUAGE plpgsql;
 
 
-SELECT fib_rel(6);
+SELECT * FROM fib_rel(6);
 
 
 
