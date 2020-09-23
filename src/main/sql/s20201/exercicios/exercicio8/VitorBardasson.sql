@@ -5,7 +5,7 @@ CREATE TABLE TabelaFibonacci (
     numero bigint
 );
 
-DROP FUNCTION fibonacci (n integer);
+DROP FUNCTION IF EXISTS fibonacci (n integer);
 
 CREATE OR REPLACE FUNCTION fibonacci (n integer)
     RETURNS TABLE (
