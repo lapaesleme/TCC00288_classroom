@@ -18,7 +18,7 @@ create table matriz(
 
 insert into matriz values ('{{4,2,3},{1,5,2},{7,2,4}}');
 
-select * from matriz1;
+select * from matriz;
 
 create function excluiLinhaColuna(m float[][], i int, j int) returns float[][] as $$
 declare
