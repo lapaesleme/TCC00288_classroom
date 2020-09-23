@@ -2,7 +2,7 @@ DROP TABLE IF EXISTS TabelaFibonacci;
 
 CREATE TABLE TabelaFibonacci (
     i integer,
-    numero integer
+    numero bigint
 );
 
 DROP FUNCTION fibonacci (n integer);
@@ -10,7 +10,7 @@ DROP FUNCTION fibonacci (n integer);
 CREATE OR REPLACE FUNCTION fibonacci (n integer)
     RETURNS TABLE (
         i integer,
-        numero integer
+        numero bigint
     )
     AS $$
 DECLARE
@@ -38,5 +38,5 @@ LANGUAGE PLPGSQL;
 SELECT
     *
 FROM
-    fibonacci (20);
+    fibonacci (30);
 

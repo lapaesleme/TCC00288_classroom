@@ -33,7 +33,7 @@ INSERT INTO matrix3 (content)
 
 INSERT INTO matrix4 (content) VALUES(ARRAY[[1,2,3]]);
 
-DROP FUNCTION transpose(matrix float[][]);
+DROP FUNCTION IF EXISTS transpose(matrix float[][]);
 CREATE OR REPLACE FUNCTION transpose(matrix float[][])
     RETURNS float[][]
     AS $$
