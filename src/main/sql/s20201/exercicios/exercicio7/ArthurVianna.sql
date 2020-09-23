@@ -16,8 +16,6 @@ INSERT INTO matriz(id, matriz_elem)
             '{{-2.0,3.0,1.0,7.0}, {0.0,-1.0,2.0,1.0}, 
             {3.0,-4.0,5.0,1.0}, {1.0,0.0,-2.0,-1.0}}');
 
-/*O resultado da função deverá ser a matriz A com a linha m
- substituída por uma combinação linear das linhas m e n*/
 DROP FUNCTION IF EXISTS transposta;
 CREATE OR REPLACE FUNCTION transposta(A float[][]) 
 RETURNS float[][] AS $$
