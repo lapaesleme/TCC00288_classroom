@@ -22,7 +22,7 @@ CREATE OR REPLACE FUNCTION fib (n int) RETURNS integer AS $$
     END;
 $$ LANGUAGE plpgsql;
 
-CREATE FUNCTION fib_rel (n integer) RETURNS float[][] AS $$
+CREATE FUNCTION fib_rel (n integer) RETURNS table(pos integer, valor integer) AS $$
     DECLARE
         result integer[][];
         aux integer[];
@@ -30,16 +30,13 @@ CREATE FUNCTION fib_rel (n integer) RETURNS float[][] AS $$
         result := array_fill(0, ARRAY[n, 2]);
 		RAISE NOTICE 'result: %', result;
         FOR i IN 1..n LOOP
-            result[i][1] := i;
-            result[i][2] := fib(i);
+            RETURN QUERY SELECT i AS pos, fib(i) AS valor;
         END LOOP;
-		
-		RETURN result;
     END;
 $$ LANGUAGE plpgsql;
 
 
-SELECT fib_rel(6);  -- {{1,1},{2,1},{3,2},{4,3},{5,5},{6,8}}
+SELECT fib_rel(6);
 
 
 
