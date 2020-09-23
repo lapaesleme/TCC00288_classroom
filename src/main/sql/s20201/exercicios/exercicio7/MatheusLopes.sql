@@ -34,7 +34,7 @@ create or replace function tranporMat (m float[][]) returns float[][] as $$
             end loop;
         end loop;
         return m_result;
-    end;
+    end
 $$ 
 language plpgsql;
 
