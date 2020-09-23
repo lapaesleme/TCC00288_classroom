@@ -41,3 +41,13 @@ WHERE NOT EXISTS (SELECT city
                   WHERE r2.city NOT IN (SELECT city
                                         FROM r2 AS r3
                               WHERE r1.city = r3.city));
+/* 
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+/**
+ * Author:  henri
+ * Created: Sep. 17, 2020
+ */
+
