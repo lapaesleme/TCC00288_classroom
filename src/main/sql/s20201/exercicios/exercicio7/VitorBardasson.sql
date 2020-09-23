@@ -4,6 +4,8 @@ DROP TABLE IF EXISTS matrix2;
 
 DROP TABLE IF EXISTS matrix3;
 
+DROP TABLE IF EXISTS matrix4;
+
 CREATE TABLE matrix1 (
     content float[][]
 );
@@ -16,6 +18,10 @@ CREATE TABLE matrix3 (
     content float[][]
 );
 
+CREATE TABLE matrix4 (
+    content float[][]
+);
+
 INSERT INTO matrix1 (content)
     VALUES (ARRAY[[1,2,5],[4,3,6],[0,2,8]]);
 
@@ -24,6 +30,8 @@ INSERT INTO matrix2 (content)
 
 INSERT INTO matrix3 (content)
     VALUES (ARRAY[[2, 0, 3],[4, 1, 6]]);
+
+INSERT INTO matrix4 (content) VALUES(ARRAY[[1,2,3]]);
 
 DROP FUNCTION transpose(matrix float[][]);
 CREATE OR REPLACE FUNCTION transpose(matrix float[][])
@@ -62,3 +70,4 @@ LANGUAGE PLPGSQL;
 SELECT transpose(matrix1.content) FROM matrix1;
 SELECT transpose(matrix2.content) FROM matrix2;
 SELECT transpose(matrix3.content) FROM matrix3;
+SELECT transpose(matrix4.content) FROM matrix4;
