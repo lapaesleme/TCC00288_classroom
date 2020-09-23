@@ -25,7 +25,7 @@ INSERT INTO matrix2 (content)
 INSERT INTO matrix3 (content)
     VALUES (ARRAY[[2, 0],[4, 1]]);
 
-DROP FUNCTION IF EXISTS linearcombination (m integer, n integer, c1 integer, c2 integer, matrix float[][]) IF EXISTS;
+DROP FUNCTION IF EXISTS linearcombination (m integer, n integer, c1 integer, c2 integer, matrix float[][]);
 CREATE OR REPLACE FUNCTION linearcombination (m integer, n integer, c1 integer, c2 integer, matrix float[][])
     RETURNS float[][]
     AS $$

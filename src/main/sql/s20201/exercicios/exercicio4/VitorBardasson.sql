@@ -25,7 +25,7 @@ INSERT INTO matrix2 (content)
 INSERT INTO matrix3 (content)
     VALUES (ARRAY[[2, 5],[4, 3]]);
 
-DROP FUNCTION IF EXISTS deletefrommatrix (selected_row integer, selected_col integer, matrix float[][]) IF EXISTS;
+DROP FUNCTION IF EXISTS deletefrommatrix (selected_row integer, selected_col integer, matrix float[][]);
 
 CREATE OR REPLACE FUNCTION deletefrommatrix (selected_row integer, selected_col integer, matrix float[][])
     RETURNS float[][]
