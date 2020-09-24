@@ -26,9 +26,9 @@ create table matriz3 (
 
 
 
-insert into matriz1 values ('{{9,8,7},{6,5,4},{3,2,1}}');
-insert into matriz2 values ('{{9,8,7},{6,5,4},{3,2,1}}');
-insert into matriz3 values ('{{1,2,3,4},{5,6,7,9},{9,10,11,12},{13,14,15,16}}');
+insert into matriz1 values (ARRAY [[1, 1, 1],[2, 2, 2],[3, 3, 3]]);
+insert into matriz2 values (ARRAY [[9, 8, 7],[6, 5, 4],[3, 2, 1]]);
+insert into matriz3 values (ARRAY [[1, 2, 3m 4],[5, 6, 7, 8],[9, 10, 11, 12]]);
 
 create or replace function multMtx (m1 float[][], m2 float [][]) returns float[][] as $$
     declare
