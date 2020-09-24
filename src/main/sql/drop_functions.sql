@@ -1,7 +1,9 @@
-DO
-$do$
+CREATE OR REPLACE FUNCTION drop_functions() RETURNS void as $do$
 DECLARE
    _sql text;
+   _schema regnamespace = 'public'::regnamespace;
+   _function_name text = 'drop_functions';
+
 BEGIN
    SELECT INTO _sql
           string_agg(format('DROP %s %s CASCADE;'
@@ -15,15 +17,19 @@ BEGIN
                           , oid::regprocedure)
                    , E'\n')
    FROM   pg_proc
-   WHERE  pronamespace = 'public'::regnamespace  -- schema name here!
+   WHERE  pronamespace = _schema  -- schema name here!
+   AND cast(oid::regprocedure as text) NOT LIKE _function_name || '%'::varchar
    -- AND    prokind = ANY ('{f,a,p,w}')         -- optionally filter kinds
    ;
 
    IF _sql IS NOT NULL THEN
-      RAISE NOTICE '%', _sql;  -- debug / check first
+      RAISE NOTICE E'\n\n%', _sql;  -- debug / check first
       EXECUTE _sql;            -- uncomment payload once you are sure
-   ELSE
-      RAISE NOTICE 'No fuctions found in schema %', quote_ident(_schema);
    END IF;
 END
-$do$;
+$do$ language plpgsql;
+
+
+execute 'select drop_functions()';
+
+--select oid::regprocedure from pg_proc where cast(oid::regprocedure as text)  not LIKE 'drop_functions%';
