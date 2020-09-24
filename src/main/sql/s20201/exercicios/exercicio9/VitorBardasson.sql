@@ -50,7 +50,7 @@ BEGIN
                     WHERE
                         pais.nome = nomepais)
                 ORDER BY
-                    estado.area) INTO areas;
+                    area) INTO areas;
 
 
     SELECT array_length(areas, 1) INTO arr_len;
