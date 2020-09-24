@@ -14,7 +14,7 @@ CREATE OR REPLACE FUNCTION detLapLace (matriz float[][]) RETURNS float
     AS $$
     DECLARE
         n integer;
-        soma float;
+        soma float = 0;
     BEGIN
         SELECT array_length(matriz,1) INTO n;
         
@@ -30,6 +30,6 @@ CREATE OR REPLACE FUNCTION detLapLace (matriz float[][]) RETURNS float
 $$
 LANGUAGE PLPGSQL;
 
-
+SELECT detLapLace(matriz.elementos) FROM matriz;
 /* Essa foi a versão original da equação dentro do loop, mas ele não estava aaceitando o SELECT ... FROM ... dentro da equação*/
 /*soma = soma + (matriz[1][j]*((-1)^(1+j))*(SELECT detLapLace(SELECT calcSubMatriz(matriz.elementos, 1, j) FROM matriz) FROM matriz));*/
