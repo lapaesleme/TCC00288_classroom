@@ -54,7 +54,6 @@ BEGIN
 
 
     SELECT array_length(areas, 1) INTO arr_len;
-    RAISE NOTICE '%', areas;
     IF (arr_len IS NULL) THEN
         RETURN 0;
     END IF;
