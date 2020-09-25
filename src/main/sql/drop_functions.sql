@@ -30,6 +30,8 @@ END
 $do$ language plpgsql;
 
 
-execute 'select drop_functions()';
+DO $$ BEGIN
+    PERFORM drop_functions();
+END $$;
 
 --select oid::regprocedure from pg_proc where cast(oid::regprocedure as text)  not LIKE 'drop_functions%';
