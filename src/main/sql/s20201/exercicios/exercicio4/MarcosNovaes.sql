@@ -1,13 +1,3 @@
-DROP TABLE IF EXISTS matriz1 CASCADE;
-
-CREATE TABLE matriz1
-(
-    content float[][]
-);
-
-INSERT INTO matriz1 (content) VALUES (ARRAY[[1, 2, 3],[4, 5, 6],[7, 8, 9]]); 
-
-
 DROP FUNCTION IF EXISTS removeLinhaColunaDaMatriz() CASCADE;
 
 CREATE OR REPLACE FUNCTION removeLinhaColunaDaMatriz (matriz1 float[][], linha integer, coluna integer)
@@ -59,6 +49,6 @@ $$
 LANGUAGE PLPGSQL;
 
 
-SELECT removeLinhaColunaDaMatriz(matriz1.content, 3,1 ) FROM matriz1;
+SELECT removeLinhaColunaDaMatriz(ARRAY[[1, 2, 3],[4, 5, 6],[7, 8, 9]], 3,1 );
 
--- SELECT removeLinhaColunaDaMatriz(matriz1.content, 20,20 ) FROM matriz1;
+SELECT removeLinhaColunaDaMatriz(ARRAY[[1, 2, 3],[4, 5, 6],[7, 8, 9]], 20,20 );

@@ -40,4 +40,6 @@ CREATE OR REPLACE FUNCTION removeLinCol(i integer, j integer, matriz float[][]) 
 $$
 LANGUAGE PLPGSQL;
 
-SELECT removeLinCol( 2 , 2 , mat1.elementos ) FROM mat1;
+SELECT removeLinCol(2,2,ARRAY[[1,2,3],[4,5,6],[7,8,9]]);
+
+/*SELECT removeLinCol( 2 , 2 , mat1.elementos ) FROM mat1;*/

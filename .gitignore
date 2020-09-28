@@ -1,7 +1,11 @@
+.idea/
+.settings/
+.project
+.classpath
+TCC00288_classroom.iml
+
 # Compiled class file
 *.class
-.idea/
-TCC00288_classroom.iml
 
 # Log file
 *.log
