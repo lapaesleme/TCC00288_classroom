@@ -1,22 +1,3 @@
-DROP TABLE IF EXISTS matriz1 CASCADE;
-
-CREATE TABLE matriz1
-(
-    content float[][]
-);
-
-DROP TABLE IF EXISTS matriz2 CASCADE;
-
-CREATE TABLE matriz2
-(
-    content float[][]
-);
-
-
-INSERT INTO matriz1 (content) VALUES (ARRAY[[1, 2, 3],[-4, 5, 6],[7, 8, 9]]);
-
-INSERT INTO matriz2 (content) VALUES (ARRAY[[1, 2],[4, 5],[7, 8]]); 
-
 DROP FUNCTION IF EXISTS operarLinhas() CASCADE;
 
 CREATE OR REPLACE FUNCTION operarLinhas(matriz1 float[][], m integer, n integer, c1 integer, c2 integer)
@@ -32,8 +13,10 @@ CREATE OR REPLACE FUNCTION operarLinhas(matriz1 float[][], m integer, n integer,
         SELECT array_fill(0, ARRAY[numLinhasMatriz, numColunasMatriz]) INTO matrizResultante;
         IF m > numLinhasMatriz OR m < 1 THEN
             RAISE EXCEPTION 'O FATOR M ESCOLHIDO NAO É VALIDO';
-        ELSE IF n > numLinhasMatriz OR n < 1 THEN
-            RAISE EXCEPTION 'O FATOR N ESCOLHIDO NAO E VALIDO';
+        ELSE 
+            IF n > numLinhasMatriz OR n < 1 THEN
+                RAISE EXCEPTION 'O FATOR N ESCOLHIDO NAO E VALIDO';
+            END IF;
         END IF;
         RAISE NOTICE 'LINHA % É COMB LINEAR COM C1 = % E C2 = % DA LINHA %',m,c1,c2,n ;
         FOR i IN 1..numLinhasMatriz LOOP
@@ -52,6 +35,4 @@ $$
 LANGUAGE PLPGSQL;
 
 
-SELECT operarLinhas(matriz1.content, 2, 1, 3, 4 ) FROM matriz1;
-
--- SELECT determinante(matriz2.content) FROM matriz2;
+SELECT operarLinhas(ARRAY[[1, 2, 3],[-4, 5, 6],[7, 8, 9]], 2, 1, 3, 4 );
