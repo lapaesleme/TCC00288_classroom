@@ -56,8 +56,9 @@ CREATE OR REPLACE FUNCTION adicionalDep() RETURNS void AS $$
             SELECT COUNT(*) FROM DEPENDENTE
                 WHERE DEPENDENTE.empregado_id = EMP.empregado_id 
                     GROUP BY DEPENDENTE.empregado_id INTO num_dep;
-            UPDATE EMPREGADO SET adicional_dep = adicional_dep * (1+(num_dep*0.05))
-                WHERE empregado_id = EMP.empregado_id;
+            UPDATE EMPREGADO 
+                SET adicional_dep = adicional_dep * (1+(num_dep*0.05))
+                    WHERE EMPREGADO.empregado_id = EMP.empregado_id;
         END LOOP;
     END
 $$ LANGUAGE plpgsql;
