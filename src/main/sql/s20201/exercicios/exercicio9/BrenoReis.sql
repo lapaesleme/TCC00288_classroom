@@ -33,8 +33,7 @@ CREATE OR REPLACE FUNCTION computarAreaMediana(paisAux varchar)
     DECLARE
         quantidadeAreas integer;
         areasAux float[];
-        a RECORD;
-        
+        a RECORD; 
     BEGIN
         FOR a IN SELECT area FROM estado WHERE estado.pais = paisAux ORDER BY area ASC LOOP
             areasAux := array_append(areasAux, a.area);
