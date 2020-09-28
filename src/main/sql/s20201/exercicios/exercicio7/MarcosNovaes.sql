@@ -1,12 +1,3 @@
-DROP TABLE IF EXISTS matriz1 CASCADE;
-
-CREATE TABLE matriz1
-(
-    content float[][]
-);
-
-INSERT INTO matriz1 (content) VALUES (ARRAY[[1, 2, 5],[-4, 5, 7],[7, 8, 9]]);
-
 DROP FUNCTION IF EXISTS transporMatriz() CASCADE;
 
 CREATE OR REPLACE FUNCTION transporMatriz(matriz1 float[][])
@@ -32,5 +23,5 @@ $$
 LANGUAGE PLPGSQL;
 
 
-SELECT transporMatriz(matriz1.content) FROM matriz1;
+SELECT transporMatriz(ARRAY[[1, 2, 5],[-4, 5, 7],[7, 8, 9]]);
 
