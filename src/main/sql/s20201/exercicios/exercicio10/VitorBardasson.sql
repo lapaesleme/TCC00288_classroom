@@ -48,10 +48,8 @@ CREATE OR REPLACE FUNCTION atualizar() RETURNS void AS $$
             FETCH curs1 into t_row;
             EXIT WHEN NOT FOUND;
             SELECT t_row.empregado_id INTO cur_id;
-            RAISE NOTICE 'cur_id: %', cur_id;
             SELECT COUNT(*) FROM dependente WHERE empregado_id = cur_id INTO n_dependentes;
-            RAISE NOTICE 'N DEPS: %', n_dependentes;
-            UPDATE empregado SET adicional_dep = adicional_dep * (1 +  (n_dependentes * 0.05)) WHERE empregado_id = cur_id;
+            UPDATE empregado SET adicional_dep = adicional_dep * (1 +  (n_dependentes * 0.05)) WHERE CURRENT OF curs1;
         END LOOP;
 
         CLOSE curs1;
