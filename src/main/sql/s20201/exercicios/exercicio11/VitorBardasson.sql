@@ -18,17 +18,12 @@ CREATE OR REPLACE FUNCTION reajustar() RETURNS void AS $$
     DECLARE
         curs1 CURSOR FOR SELECT codigo FROM produto;
         t_row record;
-        cur_cod integer;
-        updated_price float;
-        
     BEGIN
         OPEN curs1 ;
 
         LOOP
             FETCH curs1 INTO t_row;
             EXIT WHEN NOT FOUND;
-            SELECT preco*1.1 FROM produto INTO updated_price;
-            RAISE NOTICE '%', updated_price;
             UPDATE produto SET preco = round((preco * 1.1)::decimal, 2) WHERE CURRENT OF curs1;  
         END LOOP;
 
