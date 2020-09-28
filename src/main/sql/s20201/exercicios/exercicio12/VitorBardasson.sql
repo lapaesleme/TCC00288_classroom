@@ -20,7 +20,7 @@ SELECT drop_functions();
 
 CREATE OR REPLACE FUNCTION reajustarcategoria() RETURNS void AS $$
     DECLARE
-        curs1 CURSOR FOR SELECT codigo FROM produto;
+        curs1 CURSOR FOR SELECT categoria FROM produto;
         t_row record;
         cur_cat char;
         factor float;
@@ -31,7 +31,7 @@ CREATE OR REPLACE FUNCTION reajustarcategoria() RETURNS void AS $$
         LOOP
             FETCH curs1 INTO t_row;
             EXIT WHEN NOT FOUND;
-            SELECT categoria FROM produto WHERE codigo = t_row.codigo INTO cur_cat;
+            SELECT t_row.categoria INTO cur_cat;
             IF cur_cat = 'A' THEN factor := 1.05;
             ELSIF cur_cat = 'B' THEN factor := 1.1;
             ELSE factor := 1.15;
