@@ -39,4 +39,4 @@ LANGUAGE PLPGSQL;
 SELECT multiplicaMatrizes(ARRAY[[1, 2, 3],[4, 5, 6],[7, 8, 9]], ARRAY[[1],[2], [3]]);
 
 -- vai disparar exceçao
-SELECT multiplicaMatrizes(ARRAY[[1, 2, 3],[4, 5, 6],[7, 8, 9]], ARRAY[[-100, -100], [100,100]]) FROM matriz1, matriz3;
+SELECT multiplicaMatrizes(ARRAY[[1, 2, 3],[4, 5, 6],[7, 8, 9]], ARRAY[[-100, -100], [100,100]]);
