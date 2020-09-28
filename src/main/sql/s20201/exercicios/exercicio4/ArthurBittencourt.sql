@@ -28,22 +28,22 @@ lineu :=1;
 linec := cardinality(m)/cardinality(m[1:1]);
 columnc := cardinality(m[1:1]);
 
-r := m[1:columnc -1][1: linec -1];
-RAISE NOTICE 'r is %', r;
+r := m[1: linec -1][1:columnc -1];
+--RAISE NOTICE 'r is %', r;
 
 FOREACH u IN ARRAY $1
 LOOP
 
 IF columni <> j THEN 
 IF linei <> i THEN
-r[columnu][lineu] := u;
+r[lineu][columnu] := u;
 
 columnu := columnu +1;
 IF columnu = columnc THEN
 columnu := 1;
 lineu := lineu +1;
 END IF;
-RAISE NOTICE 'wrote % into r[%][%]', u, columnu, lineu;
+--RAISE NOTICE 'wrote % into r[%][%]', u, columnu, lineu;
 
 END IF;
 END IF;
@@ -74,7 +74,7 @@ testint2 integer
 );
 
 INSERT INTO testfucit VALUES(
-ARRAY [[11, 12, 13, 14], [21, 22, 23, 24], [31, 32, 33, 34], [41, 42, 43, 44] ],
+ARRAY [[11, 12, 13], [21, 22, 23], [31, 32, 33] ],
 1,
 1
 );
