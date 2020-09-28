@@ -4,7 +4,7 @@ drop table if exists produto cascade;
 CREATE TABLE produto (
 codigo integer NOT NULL,
 categoria character varying NOT NULL,
-preco real NOT NULL,
+valor real NOT NULL,
 CONSTRAINT produto_pk PRIMARY KEY
 (codigo)
 );
@@ -30,7 +30,7 @@ begin
         elsif(record.categoria = 'C')then reajuste := 1.15;
         else reajuste:= 1;
         end if;
-        UPDATE produto SET preco = preco * reajuste WHERE CURRENT OF consulta;
+        UPDATE produto SET valor = valor * reajuste WHERE CURRENT OF consulta;
    end loop;
 END
 $$ LANGUAGE plpgsql;
