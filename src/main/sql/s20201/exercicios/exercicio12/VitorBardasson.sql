@@ -1,13 +1,13 @@
 DROP TABLE IF EXISTS produto;
 DROP TYPE IF EXISTS categoria_enum;
 
-
 CREATE TYPE categoria_enum AS ENUM ('A', 'B', 'C');
 
 CREATE TABLE produto (
     codigo integer UNIQUE NOT NULL,
     categoria categoria_enum NOT NULL,
-    valor float
+    valor float,
+    CONSTRAINT produto_pk PRIMARY KEY (codigo)
 );
 
 INSERT INTO produto VALUES (1, 'A', 1000);

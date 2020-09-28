@@ -1,9 +1,10 @@
 DROP TABLE IF EXISTS produto;
 
 CREATE TABLE produto (
-    codigo integer UNIQUE NOT NULL,
+    codigo integer NOT NULL,
     nome varchar NOT NULL,
-    preco float
+    preco float,
+    CONSTRAINT produto_pk PRIMARY KEY (codigo)
 );
 
 INSERT INTO produto VALUES (1, 'Celular', 1000);
