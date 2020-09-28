@@ -35,7 +35,7 @@ insert into estado values
     ('Sao Paulo', 2, 22.5),
     ('Sao Paulo', 2, 0),
     ('Sao Paulo', 2, 100),
-    ('Sao Paulo', 2, 20.5);
+    ('Sao Paulo', 5, 20.5);
 
 
 create or replace function computarAreaMediana(nome varchar) returns float as $$
