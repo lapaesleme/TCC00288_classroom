@@ -4,7 +4,7 @@ DO $$ BEGIN
 END $$;
 
 DROP TABLE IF EXISTS produto cascade;
-
+DROP SEQUENCE produto_sequence;
 -- CREATE SEQUENCES
 
 CREATE SEQUENCE produto_sequence START 1;
@@ -30,3 +30,5 @@ $$ LANGUAGE plpgsql;
 INSERT INTO produto(nome, preco) VALUES ('Refrigerante', 9.80);
 INSERT INTO produto(nome, preco) VALUES ('Queijo', 1.00);
 
+select ajusta_preco();
+select * from produto;
