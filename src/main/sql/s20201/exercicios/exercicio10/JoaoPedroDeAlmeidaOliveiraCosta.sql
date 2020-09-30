@@ -54,7 +54,7 @@ begin
    for empregadoRecord in select * from empregado loop
         empregadoID = empregadoRecord.empregado_id;
         for numeroDependentes in select Count(*) from dependente where dependente.empregado_id = empregadoID loop
-            update empregado set adicional_dep = (1 + numeroDependentes*0.005) where empregado_id = empregadoID;
+            update empregado set adicional_dep = (1 + numeroDependentes*0.05) where empregado_id = empregadoID;
         end loop;
    end loop;
 END
