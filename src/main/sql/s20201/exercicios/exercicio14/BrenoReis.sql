@@ -85,28 +85,34 @@ CREATE OR REPLACE FUNCTION tempoMedioChamadasAux(prazoInicial timestamp, prazoFi
         qtdLigacao integer := 0;
         antenaParticipante RECORD;
         ligacoes RECORD;
-        duracao interval;
+        duracao interval = 0;
         tempoAbsoluto float;
         mediaAux float;
         nomeBairro character varying;
         nomeMunicipio character varying;
     BEGIN
-        FOR antenaParticipante IN SELECT antena_orig AS antena FROM ligacao WHERE inicio >= prazoInicial AND fim <= prazoFinal UNION SELECT antena_dest AS antena FROM ligacao WHERE inicio >= prazoInicial AND fim <= prazoFinal LOOP
+        FOR antenaParticipante IN   SELECT antena_orig AS antena FROM ligacao
+                                    WHERE inicio >= prazoInicial AND fim <= prazoFinal UNION 
+                                    SELECT antena_dest AS antena FROM ligacao 
+                                    WHERE inicio >= prazoInicial AND fim <= prazoFinal LOOP
             FOR ligacoes IN SELECT antena_orig, antena_dest, inicio, fim FROM ligacao WHERE inicio >= prazoInicial AND fim <= prazoFinal LOOP
                 IF ligacoes.antena_orig = antenaParticipante.antena OR ligacoes.antena_dest = antenaParticipante.antena THEN
                     qtdLigacao := qtdLigacao + 1;
-                    duracao := ligacoes.fim - ligacoes.inicio;
-                    tempoAbsoluto := extract(minute from duracao);
-                    tempoAbsoluto := tempoAbsoluto + extract(second from duracao)/60;
-                    tempoAbsoluto := tempoAbsoluto + extract(hour from duracao)*60;
-                    tempoAbsoluto := tempoAbsoluto + extract(day from duracao)*24*60;
+                    duracao := duracao + ligacoes.fim - ligacoes.inicio;
                 END IF;
             END LOOP;
-
+            tempoAbsoluto := extract(minute from duracao);
+            tempoAbsoluto := tempoAbsoluto + extract(second from duracao)/60;
+            tempoAbsoluto := tempoAbsoluto + extract(hour from duracao)*60;
+            tempoAbsoluto := tempoAbsoluto + extract(day from duracao)*24*60;
             SELECT nome FROM bairro WHERE bairro_id IN (SELECT bairro_id FROM antena WHERE bairro_id = antena.bairro_id AND antena_id = antenaParticipante.antena) INTO nomeBairro;
-            SELECT nome FROM municipio WHERE municipio_id IN (SELECT municipio_id FROM antena WHERE municipio_id = antena.municipio_id AND antena_id = antenaParticipante.antena) INTO nomeMunicipio;
+            SELECT nome FROM municipio 
+            WHERE municipio_id IN ( SELECT municipio_id FROM antena 
+                                    WHERE municipio_id = antena.municipio_id AND antena_id = antenaParticipante.antena) 
+                                    INTO nomeMunicipio;
             mediaAux := tempoAbsoluto / qtdLigacao;
             RETURN QUERY SELECT nomeBairro, nomeMunicipio, mediaAux;
+            duracao := 0;
 
         END LOOP;
         RETURN;
