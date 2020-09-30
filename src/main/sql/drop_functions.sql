@@ -35,6 +35,8 @@ DO $$ BEGIN
 END $$;
 
 
+select * from pg_proc;
+
 
 
 --select oid::regprocedure from pg_proc where cast(oid::regprocedure as text)  not LIKE 'drop_functions%';
