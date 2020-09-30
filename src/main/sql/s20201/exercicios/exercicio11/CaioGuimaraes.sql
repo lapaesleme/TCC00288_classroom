@@ -38,6 +38,12 @@ end
 $$
 language plpgsql;
 
+/* tabela inicial */
 select * from produto;
-select atualizaPreco();
+
+DO $$ BEGIN
+    PERFORM atualizaPreco();
+END $$;
+
+/* tabela após atualização */
 select * from produto;

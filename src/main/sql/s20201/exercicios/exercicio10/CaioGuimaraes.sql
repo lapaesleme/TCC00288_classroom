@@ -72,6 +72,10 @@ language plpgsql;
 
 /* tabela inicial */
 select * from empregado;
-select atualizaSalario();
+
+DO $$ BEGIN
+    PERFORM atualizaSalario();
+END $$;
+
 /* tabela após atualização */
 select * from empregado;
