@@ -8,9 +8,9 @@
  * Created: 28 de set. de 2020
  */
 
-/*DO $$ BEGIN
+DO $$ BEGIN
     PERFORM drop_functions();
-END $$;*/
+END $$;
 
 drop table if exists empregado cascade;
 drop table if exists dependente cascade;
