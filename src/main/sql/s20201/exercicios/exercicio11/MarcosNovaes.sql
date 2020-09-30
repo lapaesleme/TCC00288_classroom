@@ -1,6 +1,5 @@
 DO $$ BEGIN
-    -- PERFORM drop_functions(); 
-    -- nao ta funcionando 
+    PERFORM drop_functions(); 
 END $$;
 
 
