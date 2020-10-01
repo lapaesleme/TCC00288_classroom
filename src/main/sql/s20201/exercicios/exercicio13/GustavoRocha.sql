@@ -84,4 +84,5 @@ END;
 $$
 LANGUAGE PLPGSQL;
 
-SELECT computaClass('A', 1, 5);
+SELECT * FROM computaClass('A', 1, 5);
+

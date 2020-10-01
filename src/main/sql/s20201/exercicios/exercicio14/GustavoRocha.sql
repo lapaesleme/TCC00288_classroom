@@ -119,15 +119,15 @@ BEGIN
         tempoTotal := tempoTotal + EXTRACT (day FROM deltaTime)*24 *60;
 
         SELECT nome FROM bairro WHERE bairro_id IN
-        (SELECT bairro_id FROM antena WHERE bairro_id = antena.bairro_id AND antena_id = participa.antenaParticipante) INTO nBairro;
+        (SELECT bairro_id FROM antena WHERE antena_id = participa.antenaParticipante) INTO nBairro;
 
         SELECT nome FROM municipio WHERE municipio_id IN 
-        (SELECT municipio_id FROM antena WHERE municipio_id = antena.municipio_id AND antena_id = participa.antenaParticipante) INTO nMunicipio;
+        (SELECT municipio_id FROM antena WHERE antena_id = participa.antenaParticipante) INTO nMunicipio;
         
         mediaLigacoes := tempoTotal/ligacoes;
         
         RETURN QUERY SELECT nBairro,nMunicipio, mediaLigacoes ;
-
+            
         deltaTime := 0;
     END LOOP;
     RETURN;
