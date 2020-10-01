@@ -135,14 +135,4 @@ END;
 $$
 LANGUAGE PLPGSQL;
 
-DROP FUNCTION IF EXISTS ordenaDuracaoMedia(tempoIn timestamp, tempoF timestamp);
-
-CREATE OR REPLACE FUNCTION ordenaDuracaoMedia(tempoIn timestamp, tempoF timestamp) RETURNS TABLE (bairro character varying, municipio character varying, media float) AS $$
-DECLARE
-BEGIN
-    RETURN QUERY SELECT * FROM duracaoMedia(tempoIn, tempoF) ORDER BY media DESC;
-END;
-$$
-LANGUAGE PLPGSQL;
-
-SELECT duracaoMedia('2000-12-16 07:00:00','2000-12-16 23:00:00');
+SELECT * FROM duracaoMedia('2000-12-16 07:00:00','2000-12-16 23:00:00') ORDER BY media DESC;
