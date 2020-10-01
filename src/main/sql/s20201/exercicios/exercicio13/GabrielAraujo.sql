@@ -103,6 +103,6 @@ begin
 END
 $$ LANGUAGE plpgsql;
 
-select categoriza('Camp 1', 1, 4);
---select categoriza('Camp 2', 1, 4);
+--select categoriza('Camp 1', 1, 4);
+select categoriza('Camp 2', 1, 2);
 --select categoriza('Camp 2', 3, 4);
