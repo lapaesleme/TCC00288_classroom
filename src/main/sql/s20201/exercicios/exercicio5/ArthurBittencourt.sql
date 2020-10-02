@@ -62,6 +62,8 @@ RETURN r;
 
 END;
 
+$$ LANGUAGE plpgsql;
+
 DROP FUNCTION IF EXISTS det(m float[][]) CASCADE;
 
 CREATE FUNCTION det(m float[][]) RETURNS float AS $$
