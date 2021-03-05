@@ -70,6 +70,7 @@ END$do$ language plpgsql;
 --AND  (n.nspname !~ '^pg_toast' and nspname like 'pg_temp%')
 
 
+
 CREATE OR REPLACE FUNCTION drop_tables() RETURNS void as $do$
 DECLARE
     _sql text;
@@ -80,6 +81,13 @@ BEGIN
     FROM pg_catalog.pg_class c
     LEFT JOIN pg_catalog.pg_namespace n ON n.oid = c.relnamespace
     WHERE c.relkind IN ('r','s') AND  (n.nspname = 'public' OR (n.nspname !~ '^pg_toast' AND nspname LIKE 'pg_temp%'));
+
+    SELECT
+    INTO _sql
+        string_agg(format('DROP TYPE IF EXISTS %s CASCADE;', c.relname), E'\n')
+    FROM pg_catalog.pg_class c
+    LEFT JOIN pg_catalog.pg_namespace n ON n.oid = c.relnamespace
+    WHERE c.relkind IN ('c') AND  (n.nspname = 'public' OR (n.nspname !~ '^pg_toast' AND nspname LIKE 'pg_temp%'));
 
     --SELECT
     --INTO _sql
@@ -99,3 +107,5 @@ DO $$ BEGIN
     PERFORM drop_functions();
     PERFORM drop_tables();
 END $$;
+
+
