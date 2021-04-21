@@ -4,7 +4,7 @@ DECLARE
 BEGIN
     SELECT
     INTO _sql
-          string_agg(format('DROP %s %s CASCADE;'
+          string_agg(format('DROP %s IF EXISTS %s CASCADE;'
                           , CASE prokind
                               WHEN 'f' THEN 'FUNCTION'
                               WHEN 'a' THEN 'AGGREGATE'
@@ -30,7 +30,7 @@ DECLARE
 BEGIN
     SELECT
     INTO _sql
-        string_agg(format('DROP %s %s CASCADE;'
+        string_agg(format('DROP %s IF EXISTS %s CASCADE;'
                     , CASE prokind
                         WHEN 'f' THEN 'FUNCTION'
                         WHEN 'a' THEN 'AGGREGATE'
@@ -42,11 +42,11 @@ BEGIN
             , E'\n')
     FROM   pg_proc
     WHERE  pronamespace = 'public'::regnamespace
-    AND not array[proname] <@ '{"drop_functions","drop_tables"}';
+    AND not array[lower(proname)] <@ '{"drop_functions","drop_tables"}';
 
     IF _sql IS NOT NULL THEN
         RAISE NOTICE E'\n\n%', _sql;
-        EXECUTE _sql;
+        --EXECUTE _sql;
     END IF;
 END$do$ language plpgsql;
 
@@ -77,7 +77,7 @@ DECLARE
 BEGIN
     SELECT
     INTO _sql
-        string_agg(format('DROP TABLE IF EXISTS %s CASCADE;', c.relname), E'\n')
+        string_agg(format('DROP TABLE IF EXISTS %s CASCADE;', '"' || c.relname || '"'), E'\n')
     FROM pg_catalog.pg_class c
     LEFT JOIN pg_catalog.pg_namespace n ON n.oid = c.relnamespace
     WHERE c.relkind IN ('r','s') AND  (n.nspname = 'public' OR (n.nspname !~ '^pg_toast' AND nspname LIKE 'pg_temp%'));
@@ -98,7 +98,7 @@ BEGIN
 
     SELECT
     INTO _sql
-        string_agg(format('DROP TYPE IF EXISTS %s CASCADE;', c.relname), E'\n')
+        string_agg(format('DROP TYPE IF EXISTS %s CASCADE;', '"' || c.relname || '"'), E'\n')
     FROM pg_catalog.pg_class c
     LEFT JOIN pg_catalog.pg_namespace n ON n.oid = c.relnamespace
     WHERE c.relkind IN ('c') AND  (n.nspname = 'public' OR (n.nspname !~ '^pg_toast' AND nspname LIKE 'pg_temp%'));
