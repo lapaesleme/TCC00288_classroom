@@ -8,7 +8,7 @@ name varchar,
 endereco varchar
 );
 
-insert into pessoa values ('Arthur', 'rua dos bobos');
+insert into pessoa values ('Luiz', 'endereco');
 
 
 select * from pessoa;
