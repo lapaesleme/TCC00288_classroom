@@ -18,6 +18,6 @@ endereco varchar
 insert into pessoa values ('nome', 'endereco');
 
 --
--- Programa
+-- Programaaaas
 --
 select * from pessoa;
